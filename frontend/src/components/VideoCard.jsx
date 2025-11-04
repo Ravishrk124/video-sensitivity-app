@@ -1,5 +1,6 @@
 // frontend/src/components/VideoCard.jsx
 import React, { useState, useRef, useEffect } from 'react';
+import { getApiBase } from '../api/axiosClient';
 
 /* ---------------------- Helpers ---------------------- */
 const formatSize = (bytes) => {
@@ -90,9 +91,7 @@ export default function VideoCard({
   // If backend provided thumbnail URL, use it first
   useEffect(() => {
     if (video && video.thumbnail) {
-      const BACKEND_BASE = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE)
-        ? String(import.meta.env.VITE_API_BASE).replace(/\/$/, '')
-        : 'http://localhost:4000';
+      const BACKEND_BASE = getApiBase();
       const t = /^https?:\/\//i.test(video.thumbnail) ? video.thumbnail : (BACKEND_BASE + (video.thumbnail.startsWith('/') ? video.thumbnail : '/' + video.thumbnail));
       setThumbnailSrc(t);
     }
@@ -106,10 +105,7 @@ export default function VideoCard({
       return;
     }
 
-    const BACKEND_BASE = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE)
-      ? String(import.meta.env.VITE_API_BASE).replace(/\/$/, '')
-      : 'http://localhost:4000';
-
+    const BACKEND_BASE = getApiBase();
     const id = video._id || video.id;
     const fname = video.filename;
 
@@ -279,9 +275,7 @@ export default function VideoCard({
     }
     if (video.thumbnail) {
       setThumbnailSrc(prev => {
-        const BACKEND_BASE = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE)
-          ? String(import.meta.env.VITE_API_BASE).replace(/\/$/, '')
-          : 'http://localhost:4000';
+        const BACKEND_BASE = getApiBase();
         const t = /^https?:\/\//i.test(video.thumbnail) ? video.thumbnail : (BACKEND_BASE + (video.thumbnail.startsWith('/') ? video.thumbnail : '/' + video.thumbnail));
         if (t !== prev) return t;
         return prev;
