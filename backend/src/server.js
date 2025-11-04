@@ -53,7 +53,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
         console.log('Admin user created:', adminEmail);
       }
     }
-    server.listen(PORT, () => console.log('🚀 Server started on port', PORT));
+    server.listen(PORT, '0.0.0.0', () => console.log('🚀Server started and bound to 0.0.0.0:${PORT}'));
   })
   .catch((e) => { 
     console.error('❌ Mongo connection error:', e.message); 
