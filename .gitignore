@@ -1,7 +1,11 @@
-node_modules
-dist
+node_modules/
+dist/
 .env
-.vscode
+backend/.env
+frontend/.env
+uploads/
 .DS_Store
-/build
-/public/dist
+.vscode/
+.idea/
+npm-debug.log
+yarn-error.log
