@@ -37,7 +37,7 @@ CLIENT_URL=http://localhost:5173
 
 ### Frontend (.env)
 
-VITE_API_URL=http://localhost:4000
+VITE_API_BASE=http://localhost:4000
 ## Run Locally
 
 ### 1️⃣ Clone the project
