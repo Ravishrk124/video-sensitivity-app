@@ -1,8 +1,6 @@
-import axios from 'axios';
-const api = axios.create({ baseURL: 'http://localhost:4000/api' });
-api.interceptors.request.use((config) => {
-  const t = localStorage.getItem('token');
-  if (t) config.headers.Authorization = 'Bearer ' + t;
-  return config;
-});
-export default api;
+// frontend/src/services/api.js
+// Unified axios client for all API calls — uses VITE_API_BASE automatically.
+
+import client from '../api/axiosClient';
+
+export default client;
