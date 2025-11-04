@@ -26,26 +26,7 @@ A full-stack platform for **secure video uploads**, **AI-powered sensitivity ana
 | **Realtime** | Socket.io |
 | **Auth** | JWT |
 | **Media Processing** | FFmpeg |
-## Environment Variables
 
-### Backend (.env)
-```bash
-PORT=4000
-MONGO_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/video_sensitivity_app
-JWT_SECRET=supersecretkey
-FRONTEND_ORIGINS=http://localhost:5173,https://video-sensitivity-app.vercel.app
-UPLOAD_DIR=./uploads
-SERVER_URL=https://video-sensitivity-app.onrender.com
-
-### Frontend (.env)
-
-# Local
-VITE_API_BASE=http://localhost:4000
-VITE_SOCKET_URL=ws://localhost:4000
-
-# Production (set in Vercel)
-VITE_API_BASE=https://video-sensitivity-app.onrender.com
-VITE_SOCKET_URL=wss://video-sensitivity-app.onrender.com
 ## Run Locally
 
 ### 1️⃣ Clone the project
@@ -67,7 +48,30 @@ npm install
 npm run dev
 
 Then visit: http://localhost:5173
+## Environment Variables
 
+
+### Backend (.env)
+```bash
+PORT=4000
+MONGO_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/video_sensitivity_app
+JWT_SECRET=supersecretkey
+FRONTEND_ORIGINS=http://localhost:5173,https://video-sensitivity-app.vercel.app
+UPLOAD_DIR=./uploads
+SERVER_URL=https://video-sensitivity-app.onrender.com
+````
+
+## Frontend (.env)
+
+```Local
+VITE_API_BASE=http://localhost:4000
+VITE_SOCKET_URL=ws://localhost:4000
+```
+```
+Production (set in Vercel)
+VITE_API_BASE=https://video-sensitivity-app.onrender.com
+VITE_SOCKET_URL=wss://video-sensitivity-app.onrender.com.
+```
 ## Usage/Examples
 
 ### 1. Login
@@ -83,11 +87,13 @@ Body: { "filename": "sample.mp4", "expiresIn": "5m" }
 
 ### 4. Stream video
 GET /api/videos/stream/:filename?access_token=<jwt>
+
+
 ## API Reference
 Fix one small naming detail — your app’s endpoints use `/api/videos` not `/api/videos/list`.  
 So update this block:
 
-```markdown
+```markdown```
 ## API Reference
 
 | Endpoint | Method | Auth | Description |
@@ -100,15 +106,18 @@ So update this block:
 | /api/videos/signed-by-filename | POST | ✅ | Generate signed playback URL |
 | /api/videos/:id | PATCH | ✅ | Rename or update sensitivity |
 | /api/admin/regenerate-thumbs | POST | ✅ | Regenerate thumbnails (admin only) |
-## Running Tests
 
+# Running Tests
+```
 cd backend
 npm i -D jest supertest
-
+```
+```
 # Add this script in package.json:
 # "test": "jest --runInBand"
 
 npm test
+```
 ## Roadmap
 
 
