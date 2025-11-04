@@ -2,30 +2,28 @@
 
 # 🎥 Video Sensitivity App
 
-A full-stack platform for **secure video uploads**, **sensitivity analysis**, and **streaming** with real-time progress updates and multi-tenant access control.
-
+A full-stack platform for **secure video uploads**, **AI-powered sensitivity analysis**, and **seamless video streaming** with real-time progress updates and multi-tenant access control.
 
 ## Features
 
 - 🔒 JWT Authentication with Role-Based Access
 - 📤 Secure File Uploads (Multer)
-- 🧠 Sensitivity Analysis (placeholder logic)
+- 🧠 Sensitivity Analysis (Placeholder logic — ML-ready)
 - 🖼️ Automatic Thumbnail Generation (FFmpeg)
 - 📡 Real-time Processing Updates via Socket.io
 - 🎬 Signed URL Streaming with Range Support
 - 🧰 REST APIs + CLI Verification Steps
 
-## Tech Stack
+## 🧠 Tech Stack
 
 | Layer | Technology |
-|-------|-------------|
-| Frontend | React + Vite + TypeScript |
-| Backend | Node.js + Express |
-| Database | MongoDB |
-| Realtime | Socket.io |
-| Auth | JWT |
-| Media | FFmpeg |
-| Testing | Jest + Supertest |
+|--------|-------------|
+| **Frontend** | React + Vite + Tailwind CSS |
+| **Backend** | Node.js + Express |
+| **Database** | MongoDB + Mongoose |
+| **Realtime** | Socket.io |
+| **Auth** | JWT |
+| **Media Processing** | FFmpeg |
 ## Environment Variables
 
 ### Backend (.env)
@@ -35,7 +33,7 @@ MONGO_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/video_sensitivity_app
 JWT_SECRET=supersecretkey
 UPLOAD_DIR=./uploads
 SERVER_URL=http://localhost:4000
-CLIENT_URL=http://localhost:3000
+CLIENT_URL=http://localhost:5173
 
 ### Frontend (.env)
 
@@ -56,7 +54,7 @@ cd frontend
 npm install
 npm run dev
 
-Then visit: http://localhost:3000
+Then visit: http://localhost:5173
 
 ## Usage/Examples
 
@@ -95,12 +93,12 @@ npm test
 ## Roadmap
 
 - [x] Video Upload & List
-- [x] Auth + RBAC
-- [x] Streaming with Range
-- [x] Real-time Processing
-- [ ] Replace Sensitivity Placeholder with ML Model
-- [ ] Add CI/CD + Deployment
-- [ ] Improve UI for Thumbnails
+- [x] JWT Auth + RBAC
+- [x] Real-time Progress via Socket.io
+- [x] Streaming with HTTP Range
+- [ ] Integrate ML Sensitivity Model
+- [ ] Deploy (Render + Vercel)
+- [ ] Improve UI with Thumbnails
 ## Authors
 
 **Ravish Kumar**
