@@ -14,19 +14,25 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
-// Read allowed origins
+// Read allowed origins from env (comma-separated)
 const FRONTEND_ORIGINS = (process.env.FRONTEND_ORIGINS || process.env.CLIENT_URL || '')
   .split(',')
   .map(s => s.trim())
   .filter(Boolean);
 
+// Add safe defaults if none provided (local dev + your Vercel front-end)
 if (FRONTEND_ORIGINS.length === 0) {
-  FRONTEND_ORIGINS.push('http://localhost:5173', 'http://localhost:3000'); // dev defaults
+  FRONTEND_ORIGINS.push(
+    'https://video-sensitivity-app.vercel.app', // deployed frontend
+    'http://localhost:5173',                    // Vite local
+    'http://localhost:3000'                     // fallback dev
+  );
 }
 
 const corsOptions = {
   origin: function(origin, callback) {
-    if (!origin) return callback(null, true); // allow curl/postman
+    // allow requests with no origin (curl, Postman, server-to-server)
+    if (!origin) return callback(null, true);
     if (FRONTEND_ORIGINS.indexOf(origin) !== -1) return callback(null, true);
     return callback(new Error('CORS policy: origin not allowed'));
   },
