@@ -199,3 +199,506 @@ body {
   font-weight: 600;
   font-size: 13px;
 }
+
+/* ---------- VideoCard styles (polished) ---------- */
+.video-card.fancy {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 12px;
+  overflow: visible;
+  box-shadow: 0 8px 24px rgba(16,24,40,0.06);
+  border: 1px solid #eef2f6;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.video-card.fancy:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(16,24,40,0.09); }
+
+.thumb {
+  position: relative;
+  width: 100%;
+  height: 170px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(180deg,#0b1220,#0f1724);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* badges */
+.badge { position: absolute; top: 12px; padding: 6px 10px; border-radius: 999px; font-weight:700; font-size:12px; text-transform:uppercase; }
+.badge.status { left: 12px; background: #e6f2ff; color: #1e3a8a; }
+.badge.sensitivity { right: 12px; background: #dcfce7; color: #065f46; }
+.badge.sensitivity.flagged { background: #fee2e2; color: #7f1d1d; }
+
+/* progress */
+.top-progress { position: absolute; bottom: 0; left: 0; right: 0; height: 26px; display:flex; align-items:center; gap:10px; padding:0 10px; box-sizing:border-box; background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.12)); }
+.top-progress-fill { position:absolute; left:0; top:0; bottom:0; background: linear-gradient(90deg,#60a5fa,#7c3aed); width:0%; opacity:0.95; z-index:0; transition: width .25s ease; }
+.top-progress .progress-label { position:relative; z-index:1; color:#fff; font-weight:700; font-size:12px; text-shadow: 0 1px 2px rgba(0,0,0,0.6); }
+
+/* body info */
+.info { padding: 14px; display:flex; flex-direction:column; gap:8px; min-height:120px; }
+.video-title { font-weight:700; font-size:16px; color:#0b1220; margin-bottom:2px; }
+.meta-row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; color:#374151; font-size:13px; }
+.meta-item { color:#4b5563; font-size:13px; }
+
+/* muted small */
+.small-muted { color:#6b7280; font-size:13px; }
+
+/* actions */
+.actions { display:flex; gap:10px; margin-top:auto; align-items:center; }
+.btn-action {
+  background:#eef2ff; color:#1d4ed8; border:1px solid #dbeafe; padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:700;
+}
+.btn-action[disabled] { opacity:0.65; cursor:not-allowed; }
+.btn-download {
+  background:#fff; color:#0369a1; border:1px solid #cfeafe; padding:7px 10px; border-radius:8px; text-decoration:none; font-weight:600;
+}
+.btn-danger { background:#fee2e2; color:#991b1b; border:1px solid #fca5a5; padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:700; }
+.btn-danger[disabled] { opacity:0.6; cursor:not-allowed; }
+
+/* responsive: ensure cards flow nicely */
+@media (min-width: 980px) {
+  .video-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 979px) {
+  .video-card.fancy { border-radius:10px; }
+}
+/* paste at end of frontend/src/styles.css */
+
+/* Modern upload card style */
+.upload-card.modern {
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  border-radius: 14px;
+  padding: 18px;
+  border: 1px solid rgba(15,23,42,0.04);
+  box-shadow: 0 8px 20px rgba(13,18,29,0.04);
+}
+.upload-modern-row {
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.file-input-wrap {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:#f3f6f9;
+  padding:8px 12px;
+  border-radius:10px;
+  border:1px dashed rgba(15,23,42,0.04);
+  flex:1;
+  position:relative;
+}
+.file-input-wrap input[type="file"] {
+  position:absolute;
+  inset:0;
+  opacity:0;
+  width:100%;
+  cursor:pointer;
+}
+.file-input-wrap .choose-btn {
+  background:#0b69ff;
+  color:#fff;
+  padding:7px 10px;
+  border-radius:8px;
+  font-weight:700;
+  font-size:13px;
+  box-shadow: 0 6px 18px rgba(11,105,255,0.12);
+}
+.file-input-wrap .file-name { color:#374151; font-size:13px; }
+
+/* upload button */
+.upload-btn {
+  background: linear-gradient(90deg,#0b69ff,#7c3aed);
+  color:#fff;
+  padding:9px 14px;
+  border-radius:10px;
+  border:none;
+  font-weight:700;
+  box-shadow: 0 10px 30px rgba(124,58,237,0.08);
+}
+
+/* filter bar modern */
+.controls-row.modern {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:16px;
+  padding:14px;
+  border-radius:12px;
+  background:linear-gradient(180deg,#fff,#fbfdff);
+  border:1px solid rgba(15,23,42,0.03);
+  box-shadow: 0 6px 20px rgba(10,20,30,0.03);
+}
+.controls-row.modern .filter-group { display:flex; flex-direction:column; gap:8px; min-width:150px; }
+.controls-row.modern label { font-weight:700; font-size:13px; color:#111827; margin-bottom:6px; }
+.controls-row.modern select,
+.controls-row.modern input { border-radius:8px; padding:8px 10px; border:1px solid #e6edf6; background:#f9fbff; }
+
+/* thumbnail duration badge */
+.badge.duration-badge {
+  position:absolute;
+  top:12px;
+  right:12px;
+  background: rgba(0,0,0,0.6);
+  color:#fff;
+  padding:6px 8px;
+  border-radius:8px;
+  font-weight:700;
+  font-size:12px;
+  z-index:2;
+  backdrop-filter: blur(4px);
+}
+
+/* small improvements for card meta layout */
+.meta-row { display:flex; gap:16px; flex-wrap:wrap; align-items:center; color:#4b5563; font-size:13px; }
+.meta-item { color:#6b7280; }
+
+/* ---------- card: duration bottom-left ---------- */
+.duration-bottom {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 3;
+  background: rgba(0,0,0,0.6);
+  padding: 6px 8px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight:700;
+  font-size:12px;
+  backdrop-filter: blur(5px);
+}
+.duration-text { letter-spacing: 0.3px; }
+
+/* sensitivity toggle button (top-right) */
+.sensitivity-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  width:38px;
+  height:34px;
+  border-radius:10px;
+  border: none;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+  cursor: pointer;
+}
+.sensitivity-btn.safe { background: rgba(220,252,231,0.95); color: #065f46; }
+.sensitivity-btn.flagged { background: rgba(254,226,226,0.98); color: #7f1d1d; }
+.sensitivity-btn svg { display:block; }
+
+/* edit button (small pencil) */
+.icon-btn {
+  border: none;
+  background: transparent;
+  padding:6px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.icon-btn:hover { background: rgba(15,23,42,0.03); }
+
+/* rename input */
+.rename-input {
+  padding:8px 10px;
+  border-radius:8px;
+  border:1px solid #e6edf6;
+  background:#fff;
+  min-width: 220px;
+}
+
+/* title row */
+.title-row .video-title { font-weight:700; font-size:16px; color:#0b1220; }
+
+/* small ghost button style for cancel */
+.btn.small { padding:6px 8px; border-radius:8px; font-weight:700; cursor:pointer; }
+.btn.small.ghost { background: transparent; border: 1px solid #e6edf6; }
+
+/* make sure progress label stands out */
+.top-progress .progress-label { position:relative; z-index:2; color:#fff; font-weight:700; font-size:12px; text-shadow: 0 1px 2px rgba(0,0,0,0.6); }
+
+
+/* ---- actions menu ---- */
+.actions-menu-root { position: relative; display: inline-block; }
+.icon-btn.three-dots { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; border:none; background:transparent; cursor:pointer; }
+.actions-menu-popover {
+  position: absolute;
+  right: 0;
+  top: 44px;
+  min-width: 160px;
+  background: #fff;
+  border-radius:10px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.12);
+  border: 1px solid #eef2f6;
+  z-index: 40;
+  padding: 8px;
+}
+.menu-item { display:flex; align-items:center; gap:8px; padding:8px 10px; width:100%; border-radius:8px; background:transparent; border:none; text-align:left; cursor:pointer; font-weight:700; color:#111827; }
+.menu-item:hover { background: #f3f6fb; }
+.menu-icon { width:18px; display:inline-block; opacity:0.9 }
+.menu-sep { height:1px; background:#f1f5f9; margin:6px 0; }
+.menu-item.danger { color:#991b1b; font-weight:800 }
+
+/* ---- corner icon with small tooltip label ---- */
+.thumb-corner-icons { position:absolute; right:12px; top:46px; display:flex; gap:6px; z-index:10; pointer-events: none; }
+.corner-icon { position: relative; pointer-events: auto; display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background: rgba(255,255,255,0.95); box-shadow: 0 6px 18px rgba(2,6,23,0.06); font-size:16px; }
+.corner-label { position:absolute; top:40px; left:50%; transform:translateX(-50%); background: #111827; color:#fff; padding:4px 8px; border-radius:6px; font-size:12px; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .12s; }
+.corner-icon:hover .corner-label { opacity:1; }
+
+/* duration bottom-left */
+.duration-bottom { position:absolute; left:12px; bottom:12px; z-index:3; background: rgba(0,0,0,0.6); padding:6px 8px; border-radius:8px; color:#fff; font-weight:700; font-size:12px; backdrop-filter: blur(5px); }
+
+/* details popover (below header) */
+.details-popover { margin-top:8px; background:#fff; border:1px solid #eef2f6; padding:10px; border-radius:8px; box-shadow: 0 8px 24px rgba(2,6,23,0.06); font-size:13px; color:#374151; }
+
+/* modal animation */
+.modal-animated { animation: modalEnter .22s cubic-bezier(.2,.9,.2,1); transform-origin: center; }
+@keyframes modalEnter {
+  from { opacity: 0; transform: scale(.96) translateY(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* small button styles used above */
+.btn.small { padding:6px 8px; border-radius:8px; background:#eef2ff; border:1px solid #dbeafe; font-weight:700; cursor:pointer; }
+.btn.small.ghost { background:transparent; border:1px solid #e6edf6; }
+.rename-input { padding:8px 10px; border-radius:8px; border:1px solid #e6edf6; min-width:200px; }
+
+/* ensure menu/popovers have high z */
+.actions-menu-popover, .details-popover { z-index:60; }
+
+
+/* Card popover (small summary + actions) */
+.card-popover {
+  position: absolute;
+  right: 12px;
+  top: 64px;
+  width: 320px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 14px 40px rgba(8,10,18,0.12);
+  padding: 12px;
+  z-index: 80;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* small text style */
+.card-popover .small { font-size: 13px; color: #374151; }
+
+/* popover actions */
+.popover-actions { display:flex; gap:8px; margin-top:10px; justify-content:flex-end; flex-wrap:wrap; }
+.popover-actions .btn-action { padding:6px 10px; border-radius:8px; font-weight:600; }
+.popover-actions .btn-danger { padding:6px 10px; }
+
+/* corner icon button top-right */
+.corner-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255,255,255,0.95);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow: 0 6px 14px rgba(8,10,18,0.06);
+  cursor: pointer;
+  z-index: 40;
+}
+.corner-icon-inner { font-size: 14px; }
+
+/* duration badge bottom-left */
+.duration-badge {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-weight:700;
+  font-size: 13px;
+  z-index: 40;
+}
+
+/* menu trigger (three dots) on body */
+.menu-trigger {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+/* ensure popover doesn't push card height */
+.video-card { position: relative; overflow: visible; }
+
+/* top small progress label */
+.top-progress { position: absolute; bottom: 0; left:0; right:0; height: 28px; display:flex; align-items:center; padding:0 12px; box-sizing:border-box; }
+.top-progress-fill { position:absolute; left:0; top:0; bottom:0; background: linear-gradient(90deg,#60a5fa,#7c3aed); width:0%; opacity:0.9; z-index:0; transition: width .2s ease; }
+.progress-label { position: relative; z-index:1; color:#fff; font-size:13px; font-weight:700; margin-left:6px; }
+
+/* small responsive tweaks */
+@media (max-width: 720px) {
+  .card-popover { right: 8px; left: 8px; top: 54px; width: auto; }
+}
+
+/* --- small UI tweaks for compact 3-dot menu & vertical meta --- */
+
+.mini-flag-btn {
+  position: absolute;
+  top: 10px;
+  right: 48px; /* leave room for three-dots */
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255,255,255,0.95);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow: 0 4px 10px rgba(16,24,40,0.06);
+  font-size: 14px;
+}
+
+/* three-dots (tiny) */
+.three-dots {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(255,255,255,0.95);
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(16,24,40,0.06);
+}
+
+/* dot-menu (small compact popup) */
+.dot-menu {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  width: 180px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.18);
+  padding: 8px;
+  z-index: 30;
+}
+.dot-menu .menu-item {
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:8px 10px;
+  border-radius:8px;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+}
+.dot-menu .menu-item:hover { background:#f3f4f6; }
+.dot-menu .menu-close { display:block; margin-top:6px; padding:6px; width:100%; border-radius:8px; background:#fee2e2; border:none; cursor:pointer; }
+
+/* rename form */
+.rename-form input { width:100%; padding:8px; border-radius:8px; border:1px solid #e5e7eb; }
+
+/* duration badge bottom-left */
+.duration-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-weight:700;
+  font-size: 13px;
+}
+
+/* vertical meta on card */
+.meta-vertical { display:flex; flex-direction:column; gap:6px; color:#6b7280; font-size:13px; margin-top:8px; }
+
+/* small button style */
+.btn.small { padding:6px 10px; border-radius:6px; }
+
+/* compact action row */
+.video-card .actions { display:flex; gap:10px; margin-top:12px; justify-content:flex-start; }
+
+/* make sure placeholder and small popup don't reflow card size */
+.video-card .thumb { cursor: pointer; position:relative; }
+.video-card .info { padding: 12px 16px; }
+
+
+.play-overlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.45);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  z-index: 6;
+}
+.thumb { position: relative; overflow: hidden; }
+.duration-badge { position: absolute; left: 10px; bottom: 12px; background:#000; color:#fff; padding:6px 8px; border-radius:8px; font-size:12px; z-index:5; }
+.mini-flag-btn { position: absolute; right: 54px; top: 12px; z-index: 6; background: white; border-radius:8px; padding:6px; border: none; }
+.three-dots { position: absolute; right: 12px; top: 12px; z-index: 6; background: white; border-radius:8px; padding:6px; }
+.dot-menu { position: absolute; right: 12px; top: 44px; z-index: 20; background: #fff; border-radius:8px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); padding:8px; min-width:120px; }
+.menu-item { display:block; width:100%; text-align:left; padding:8px; border:none; background:transparent; cursor:pointer; }
+
+/* modal overlay + animation */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 12, 20, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* soft grow+fade animation for modal */
+.animated-modal .modal {
+  animation: modalPop 220ms cubic-bezier(.2,.9,.3,1);
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px;
+  max-width: 1000px;
+  width: calc(100% - 64px);
+  box-shadow: 0 10px 30px rgba(2,6,23,0.5);
+}
+@keyframes modalPop {
+  from { transform: translateY(8px) scale(.995); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* player modal tweaks */
+.player-modal .player-header { padding-bottom: 6px; border-bottom: 1px solid rgba(0,0,0,0.04); margin-bottom: 12px; }
+.player-modal .btn.small { padding: 6px 8px; font-size: 13px; }
+
+/* floating play overlay already present on cards; keep styles consistent */

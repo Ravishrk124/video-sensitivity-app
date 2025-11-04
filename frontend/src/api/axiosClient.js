@@ -1,7 +1,12 @@
 // frontend/src/api/axiosClient.js
 import axios from 'axios';
 
-const API_BASE = (import.meta.env.VITE_API_BASE || 'http://localhost:4000').replace(/\/$/, '');
+export function getApiBase() {
+  const raw = import.meta.env.VITE_API_BASE || 'http://localhost:4000';
+  return raw.replace(/\/$/, '');
+}
+
+const API_BASE = getApiBase();
 const API = API_BASE + '/api';
 
 const client = axios.create({
@@ -9,23 +14,27 @@ const client = axios.create({
   timeout: 120000,
 });
 
-client.interceptors.request.use(config => {
-  try {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-    if (token) {
-      config.headers = config.headers || {};
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-  } catch (e) {}
-  return config;
-}, err => Promise.reject(err));
+client.interceptors.request.use(
+  (config) => {
+    try {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+      if (token) {
+        config.headers = config.headers || {};
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    } catch (e) {}
+    return config;
+  },
+  (err) => Promise.reject(err)
+);
 
 export function authHeaders() {
   try {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     return token ? { Authorization: `Bearer ${token}` } : {};
-  } catch (e) { return {}; }
+  } catch (e) {
+    return {};
+  }
 }
 
-export function getApiBase() { return API_BASE; }
 export default client;

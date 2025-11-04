@@ -1,0 +1,39 @@
+/* video-modal.css */
+.vs-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3,7,18,0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: vs-fade-in .18s ease;
+}
+.vs-modal {
+  width: min(960px, 92%);
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 30px 80px rgba(3,7,18,0.6);
+  transform-origin: center;
+  animation: vs-scale-in .2s cubic-bezier(.2,.9,.3,1);
+}
+.vs-modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.vs-modal-title { font-size:16px; color:#0b1220; }
+.vs-close-btn { border:0; background:transparent; font-size:18px; cursor:pointer; padding:6px; border-radius:6px; }
+.vs-player-wrap { position:relative; border-radius:8px; overflow:hidden; background:#000; }
+.vs-modal-footer { margin-top:10px; display:flex; justify-content:flex-end; }
+
+.vs-spinner { position:absolute; left:0; right:0; top:0; bottom:0; display:flex; align-items:center; justify-content:center; z-index:2; }
+.vs-loader {
+  width:48px; height:48px; border-radius:50%;
+  border:4px solid rgba(255,255,255,0.08);
+  border-top-color: rgba(255,255,255,0.6);
+  animation: vs-spin 1s linear infinite;
+  box-shadow:0 2px 12px rgba(0,0,0,0.4);
+}
+.vs-error { padding:12px; color:#ef4444; background: #fff5f5; border-radius:8px; margin:12px 8px; }
+
+@keyframes vs-spin { to { transform: rotate(360deg); } }
+@keyframes vs-fade-in { from { opacity: 0 } to { opacity:1 } }
+@keyframes vs-scale-in { from { transform: scale(.98) translateY(6px); opacity:0 } to { transform: scale(1) translateY(0); opacity:1 } }
