@@ -1,0 +1,24 @@
+# Ignore node_modules
+node_modules/
+
+# Ignore environment files
+.env
+.env.local
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore uploads (will be created at runtime)
+uploads/
+
+# Ignore temp files
+temp/
+frames/
+
+# Ignore OS files
+.DS_Store
+
+# Ignore IDE
+.vscode/
+.idea/
