@@ -96,15 +96,12 @@ export default function Login({ onLogin, onSwitchToRegister }) {
                                 onClick={onSwitchToRegister}
                                 className="text-primary-600 dark:text-primary-400 hover:underline font-medium"
                             >
-                                Register here
+                                Create your account
                             </button>
                         </p>
-                    </div>
-
-                    <div className="mt-6 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg text-xs text-gray-600 dark:text-gray-400">
-                        <p className="font-medium mb-1">Demo Accounts:</p>
-                        <p>Admin: admin@example.com / Admin@1234</p>
-                        <p>Editor: editor1@example.com / Editor@1234</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+                            Register as Editor to upload and analyze videos
+                        </p>
                     </div>
                 </div>
             </div>
