@@ -180,19 +180,112 @@ Ensure `FRONTEND_ORIGINS` in backend `.env` includes your frontend URL.
 
 ---
 
-## Production Deployment
+## 🚀 Live Deployment
 
-### Backend
-1. Set `NODE_ENV=production`
-2. Use a strong `JWT_SECRET`
-3. Configure proper MongoDB connection string
-4. Set up environment variables on your hosting platform
-5. Ensure FFmpeg is installed on the server
+The application is deployed and accessible at:
 
-### Frontend
-1. Update `VITE_API_BASE` to your production backend URL
-2. Build: `npm run build`
-3. Deploy the `dist` folder to your hosting platform (Vercel, Netlify, etc.)
+- **Frontend (Vercel)**: https://video-sensitivity-app-b9q8.vercel.app
+- **Backend (Render)**: https://video-sensitivity-app-x03m.onrender.com
+- **Database**: MongoDB Atlas (Cloud)
+
+### Deployment Architecture
+
+- **Frontend**: Vercel (auto-deploys from `main` branch)
+- **Backend**: Render with Docker (includes FFmpeg)
+- **Storage**: MongoDB Atlas for data, ephemeral disk for uploads
+- **AI**: Sightengine API (cloud-based)
+
+---
+
+## Production Deployment Guide
+
+### Backend (Render + Docker)
+
+**Prerequisites:**
+- GitHub repository
+- Render account
+- MongoDB Atlas cluster
+- Sightengine API credentials
+
+**Steps:**
+
+1. **Create Render Web Service:**
+   - Connect GitHub repository
+   - Environment: **Docker** (required for FFmpeg)
+   - Root Directory: `backend`
+   - Dockerfile Path: `backend/Dockerfile`
+
+2. **Configure Environment Variables:**
+   ```
+   NODE_ENV=production
+   PORT=4000
+   MONGO_URI=mongodb+srv://user:pass@cluster.mongodb.net/dbname
+   JWT_SECRET=your-super-secret-key-min-32-chars
+   SIGHTENGINE_USER=your_sightengine_user_id
+   SIGHTENGINE_SECRET=your_sightengine_secret_key
+   ADMIN_EMAIL=admin@yourdomain.com
+   ADMIN_PASSWORD=SecureAdminPassword123!
+   FRONTEND_ORIGINS=https://your-app.vercel.app
+   UPLOAD_DIR=./uploads
+   ```
+
+3. **Deploy:**
+   - Render will build Docker image with FFmpeg
+   - Auto-deploys on every git push to `main`
+
+**⚠️ Known Limitation:**
+- Uploaded videos/thumbnails are stored in **ephemeral storage**
+- Files are **lost on every redeploy**
+- **Solution**: Add Render Disk ($1/month for 1GB) or use Cloudinary
+
+### Frontend (Vercel)
+
+**Prerequisites:**
+- Vercel account
+- Backend deployed and URL ready
+
+**Steps:**
+
+1. **Import GitHub Repository:**
+   - Connect to Vercel
+   - Framework Preset: Vite
+   - Root Directory: `frontend`
+
+2. **Configure Build Settings:**
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+   - Install Command: `npm install`
+
+3. **Environment Variables:**
+   ```
+   VITE_API_BASE=https://your-backend.onrender.com
+   ```
+
+4. **Deploy:**
+   - Vercel auto-deploys on every push
+   - Preview URLs for branches
+   - Production URL for `main` branch
+
+**Note:** The `frontend/vercel.json` handles SPA routing (already configured).
+
+---
+
+## Docker Deployment (FFmpeg)
+
+The backend uses Docker to ensure FFmpeg is available:
+
+```dockerfile
+FROM node:18-slim
+RUN apt-get update && apt-get install -y ffmpeg
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --production
+COPY . .
+EXPOSE 4000
+CMD ["node", "src/server.js"]
+```
+
+This ensures video processing works on Render's platform.
 
 ---
 
